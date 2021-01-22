@@ -1,11 +1,14 @@
-import fetch from "./csrf";
+import { fetch } from "./csrf";
 import { dispatch, getState } from "react-redux";
 
-function getSession() {
-  return function (dispatch, getState) {
-    return fetch("/api/session", "POST").then(function () {
-      dispatch(setSessionUser(res.data));
+export function login({ credential, password }) {
+  return async function (dispatch, getState) {
+    const session = await fetch("/api/session", {
+      method: "POST",
+      body: JSON.stringify({ credential, password }),
     });
+    dispatch(setSessionUser(session.data.user));
+    return session;
   };
 }
 
@@ -19,7 +22,7 @@ export function removeSessionUser(session) {
 
 const defaultState = { user: null };
 
-export const sessionReducer = (state = defaultState, action) => {
+export default function sessionReducer(state = defaultState, action) {
   let newState;
   switch (action.type) {
     case "SET_SESSION_USER":
@@ -29,4 +32,4 @@ export const sessionReducer = (state = defaultState, action) => {
     default:
       return state;
   }
-};
+}

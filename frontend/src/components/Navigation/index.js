@@ -30,6 +30,11 @@ function Navigation({ isLoaded }) {
           <NavLink className="navlink" exact to="/">
             Home
           </NavLink>
+          {sessionUser && (
+            <NavLink className="navlink" to="/profile">
+              Profile
+            </NavLink>
+          )}
         </li>
         <li>{isLoaded && sessionLinks}</li>
       </ul>

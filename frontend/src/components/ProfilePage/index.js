@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from "react";
-import * as sessionActions from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { fetch } from "../../store/csrf";
 import Header from "./header";
 
 function ProfilePage() {
-  const dispatch = useDispatch();
+  const [data, setData] = useState();
   const sessionUser = useSelector((state) => state.session.user);
   const userId = sessionUser.id;
+  async function profileFetch() {
+    const res = await fetch(`/api/profile/${userId}`);
+    if (res.ok) {
+      let data = await res.data;
+      setData(data);
+    }
+  }
 
   useEffect(() => {
-    async function profileFetch() {
-      const res = await fetch(`/api/profile/${userId}`);
-      if (res.ok) {
-        const data = await res.data;
-        console.log(data);
-      }
-    }
     profileFetch();
   }, []);
 
   return (
     <div>
-      <h1>Profile Page</h1>
-      <Header></Header>
+      <Header data={data}></Header>
     </div>
   );
 }

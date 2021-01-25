@@ -1,0 +1,29 @@
+.banner {
+  width: 98%;
+  z-index: -100;
+}
+
+.profilePicture {
+  width: 10%;
+  position: absolute;
+  z-index: 100;
+}
+
+.headerbox {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}

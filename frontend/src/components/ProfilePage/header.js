@@ -1,15 +1,28 @@
-import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import React, { useEffect } from "react";
+import "./Header.css";
 
-function Header() {
-  const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+function Header({ data }) {
+  console.log(data);
+
+  useEffect(() => {});
 
   return (
-    <div>
-      <img></img>
+    <div className="headerbox">
+      <img
+        className="banner"
+        src="https://cloudsoundappbucket.s3-us-west-1.amazonaws.com/Default-Banner.png"
+        alt="banner"
+      ></img>
+      <div className="row">
+        <div className="column">
+          <img
+            src="https://cloudsoundappbucket.s3-us-west-1.amazonaws.com/logo.png"
+            className="profilePicture"
+            alt="Profile"
+          ></img>
+        </div>
+        <div className="column"></div>
+      </div>
     </div>
   );
 }

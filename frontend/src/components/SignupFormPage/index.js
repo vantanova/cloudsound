@@ -37,7 +37,7 @@ function SignupFormPage() {
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <label>
+      <label className="navlink">
         Email
         <input
           type="text"
@@ -46,7 +46,7 @@ function SignupFormPage() {
           required
         />
       </label>
-      <label>
+      <label className="navlink">
         Username
         <input
           type="text"
@@ -55,7 +55,7 @@ function SignupFormPage() {
           required
         />
       </label>
-      <label>
+      <label className="navlink">
         Password
         <input
           type="password"
@@ -64,7 +64,7 @@ function SignupFormPage() {
           required
         />
       </label>
-      <label>
+      <label className="navlink">
         Confirm Password
         <input
           type="password"

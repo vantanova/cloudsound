@@ -31,7 +31,7 @@ function LoginFormPage() {
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <label>
+      <label className="navlink">
         Username or Email
         <input
           type="text"
@@ -40,7 +40,7 @@ function LoginFormPage() {
           required
         />
       </label>
-      <label>
+      <label className="navlink">
         Password
         <input
           type="password"

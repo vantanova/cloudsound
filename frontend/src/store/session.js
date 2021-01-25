@@ -11,6 +11,33 @@ export function login({ credential, password }) {
     return session;
   };
 }
+export const signup = (user) => async (dispatch) => {
+  const { username, email, password } = user;
+  const response = await fetch("/api/users", {
+    method: "POST",
+    body: JSON.stringify({
+      username,
+      email,
+      password,
+    }),
+  });
+  dispatch(setSessionUser(response.data.user));
+  return response;
+};
+
+export const logout = () => async (dispatch) => {
+  const response = await fetch("/api/session", {
+    method: "DELETE",
+  });
+  dispatch(removeSessionUser());
+  return response;
+};
+
+export const restoreUser = () => async (dispatch) => {
+  const res = await fetch("/api/session");
+  dispatch(setSessionUser(res.data.user));
+  return res;
+};
 
 export function setSessionUser(session) {
   return { type: "SET_SESSION_USER", session };

@@ -24,8 +24,6 @@ router.get(
   })
 );
 
-module.exports = router;
-
 // API routes
 const apiRouter = require("./api");
 
@@ -64,3 +62,5 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // ...
+
+module.exports = router;

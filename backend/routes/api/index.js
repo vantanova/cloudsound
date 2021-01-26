@@ -3,10 +3,12 @@ const router = require("express").Router();
 const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
 const profileRouter = require("./profile.js");
+const homeRouter = require("./home.js");
 
 router.use("/session", sessionRouter);
 router.use("/profile", profileRouter);
 router.use("/users", usersRouter);
+router.use("/", homeRouter);
 
 module.exports = router;
 

@@ -38,7 +38,7 @@ function ProfilePage() {
             </div>
           </Content>
         </Layout>
-        <Footer>Footer</Footer>
+        <Footer></Footer>
       </Layout>
     </div>
   );

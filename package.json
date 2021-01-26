@@ -21,5 +21,6 @@
   "bugs": {
     "url": "https://github.com/vantanova/cloudsound/issues"
   },
-  "homepage": "https://github.com/vantanova/cloudsound#readme"
+  "homepage": "https://github.com/vantanova/cloudsound#readme",
+  "dependencies": {}
 }

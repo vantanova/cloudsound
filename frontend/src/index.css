@@ -10,10 +10,14 @@
   display: flex;
   justify-content: space-between;
   list-style: none;
+  background-color: #161617;
 }
 
 #root {
   height: 100%;
+  background-image: url("https://cloudsoundappbucket.s3-us-west-1.amazonaws.com/repeated-square-dark.png");
+  background-repeat: repeat;
+  /* background-color: #161617; */
 }
 
 .layout {

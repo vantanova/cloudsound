@@ -9,11 +9,10 @@ function MusicCarousel() {
     color: "#fff",
     lineHeight: "160px",
     textAlign: "center",
-    background: "#333",
   };
   return (
     <Carousel autoplay autoplaySpeed={9000} fade={true}>
-      <div style={{ backgroundColor: "#364d79" }}>
+      <div>
         <h3 style={contentStyle}>
           <img
             className="CarouselImage"

@@ -8,14 +8,16 @@
 
 .navlink {
   font-family: "Karla", sans-serif;
-  color: black;
+  color: white;
   margin: 2px;
   text-decoration: none;
+  font-size: 16px;
 }
 
-.logoText {
-  margin-right: auto;
+.logo {
+  color: whitesmoke;
+  /* margin-right: auto;
   display: flex;
   align-items: center;
-  margin-bottom: -35px;
+  margin-bottom: -35px; */
 }

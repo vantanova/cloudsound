@@ -7,6 +7,7 @@ import ProfilePage from "./components/ProfilePage";
 import HomePage from "./components/HomePage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import UploadPage from "./components/UploadPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/profile">
             <ProfilePage />
+          </Route>
+          <Route path="/upload">
+            <UploadPage />
           </Route>
         </Switch>
       )}

@@ -1,0 +1,33 @@
+.ant-layout.layout {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.ant-layout-content {
+  margin: 50px;
+  background: #fff;
+  padding: 24px;
+  height: 300px;
+}
+
+body {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  height: 100%;
+}
+
+.uploadBox {
+  height: 500px;
+  width: 500px;
+}
+
+body {
+  overflow: hidden; /* Hide scrollbars */
+}

@@ -27,7 +27,7 @@ function HomePage() {
   return (
     <div>
       <MusicCarousel></MusicCarousel>
-      <SongCard></SongCard>
+      <SongCard data={data}></SongCard>
     </div>
   );
 }

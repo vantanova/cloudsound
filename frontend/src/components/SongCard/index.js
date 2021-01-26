@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { fetch } from "../../store/csrf";
-import MusicCarousel from "../MusicCarousel";
+import { NavLink } from "react-router-dom";
+import "antd/dist/antd.css";
+import "./index.css";
+import { Card, Avatar } from "antd";
+const { Meta } = Card;
 
-function SongCard() {
-  //   const [data, setData] = useState();
-  //   const sessionUser = useSelector((state) => state.session.user);
-  //   if (sessionUser) {
-  //     const userId = sessionUser.id;
-  //   }
+function SongCard({ data }) {
+  let songData;
 
-  //   async function homepageFetch() {
-  //     const res = await fetch(`/api/`);
-  //     if (res.ok) {
-  //       let data = await res.data;
-  //       console.log(data);
-  //       setData(data);
-  //     }
-  //   }
+  if (data) {
+    songData = data.homeFiles[0];
+  } else {
+  }
 
-  //   useEffect(() => {
-  //     homepageFetch();
-  //   }, []);
+  console.log(songData);
 
   return (
-    <div>
-      <p>Song Card</p>
+    <div style={{ width: 150, marginLeft: 10 }}>
+      {songData ? (
+        <Card
+          style={{ width: 150 }}
+          cover={<img alt="example" src={songData.image} />}
+        >
+          <Meta title={songData.title} />
+        </Card>
+      ) : (
+        <Card style={{ width: 200 }} loading={true} />
+      )}
     </div>
   );
 }

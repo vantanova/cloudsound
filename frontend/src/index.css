@@ -1,13 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Karla&display=swap");
 
+.navlink {
+  font-family: "Karla", sans-serif;
+  color: black;
+  text-decoration: none;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   list-style: none;
 }
 
-.navlink {
-  font-family: "Karla", sans-serif;
-  color: black;
-  text-decoration: none;
+#root {
+  height: 100%;
+}
+
+.layout {
+  height: 100%;
+}
+
+.ant-layout {
+  height: 100%;
+}
+
+.ant-layout-content {
+  background-color: white;
 }

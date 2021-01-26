@@ -5,7 +5,10 @@ import { fetch } from "../../store/csrf";
 function HomePage() {
   const [data, setData] = useState();
   const sessionUser = useSelector((state) => state.session.user);
-  const userId = sessionUser.id;
+  if (sessionUser) {
+    const userId = sessionUser.id;
+  }
+
   async function homepageFetch() {
     const res = await fetch(`/api/`);
     if (res.ok) {

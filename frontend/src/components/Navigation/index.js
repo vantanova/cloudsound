@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import "antd/dist/antd.css";
@@ -28,13 +29,16 @@ function Navigation({ isLoaded }) {
   return (
     <div>
       <ul className="navbar">
+        <li className="logoText">
+          <h1>CloudSound</h1>
+        </li>
         <li>
           <NavLink className="navlink" exact to="/">
-            Home
+            <Button>Home</Button>
           </NavLink>
           {sessionUser && (
             <NavLink className="navlink" to="/profile">
-              Profile
+              <Button>Profile</Button>
             </NavLink>
           )}
           {sessionUser && (

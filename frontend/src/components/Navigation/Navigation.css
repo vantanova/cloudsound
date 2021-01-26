@@ -2,12 +2,20 @@
 
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   list-style: none;
 }
 
 .navlink {
   font-family: "Karla", sans-serif;
   color: black;
+  margin: 2px;
   text-decoration: none;
+}
+
+.logoText {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  margin-bottom: -35px;
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { fetch } from "../../store/csrf";
+import MusicCarousel from "../MusicCarousel";
+import SongCard from "../SongCard";
 
 function HomePage() {
   const [data, setData] = useState();
@@ -22,7 +24,12 @@ function HomePage() {
     homepageFetch();
   }, []);
 
-  return <p>Home Page</p>;
+  return (
+    <div>
+      <MusicCarousel></MusicCarousel>
+      <SongCard></SongCard>
+    </div>
+  );
 }
 
 export default HomePage;

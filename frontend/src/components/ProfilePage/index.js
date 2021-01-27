@@ -19,6 +19,7 @@ import {
 } from "antd";
 import "./Header.css";
 import "antd/dist/antd.css";
+import UploadPhoto from "../UploadPhoto";
 
 function ProfilePage() {
   const { Header, Footer, Sider, Content } = Layout;
@@ -54,22 +55,10 @@ function ProfilePage() {
   const menu = (
     <Menu>
       <Menu.Item icon={<EditOutlined />}>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.alipay.com/"
-        >
-          Profile Photo
-        </a>
+        <UploadPhoto data={["Profile Photo"]}></UploadPhoto>
       </Menu.Item>
       <Menu.Item icon={<EditOutlined />}>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.taobao.com/"
-        >
-          Header Photo
-        </a>
+        <UploadPhoto data={["Header Photo"]}></UploadPhoto>
       </Menu.Item>
     </Menu>
   );
@@ -168,7 +157,21 @@ function ProfilePage() {
                 paddingLeft: "30px",
               }}
             >
-              <h5>About Me</h5>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <h5>About Me</h5>
+                <Button
+                  type="dashed"
+                  shape="circle"
+                  icon={<EditOutlined />}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginRight: "15px",
+                    background: "none",
+                  }}
+                ></Button>
+              </div>
               {data && <p>{profileData.bio}</p>}
             </Col>
             <Col span={16} style={{ paddingRight: "10px" }}>

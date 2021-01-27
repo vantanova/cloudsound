@@ -84,7 +84,7 @@ function UploadPage() {
   }, []);
 
   return (
-    <Layout className="layout">
+    <Layout className="layout" style={{ background: "none" }}>
       <Content style={{ backgroundColor: "#edeeef", marginTop: "0px" }}>
         {/* <div className="site-layout-content">Content</div> */}
         <div className="centered">
@@ -149,7 +149,6 @@ function UploadPage() {
           </div>
         </div>
       </Content>
-      <Footer style={{ textAlign: "center" }}>Upload</Footer>
     </Layout>
   );
 }

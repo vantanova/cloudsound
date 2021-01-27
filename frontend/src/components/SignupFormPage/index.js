@@ -31,13 +31,15 @@ function SignupFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ backgroundColor: "white" }}>
       <ul>
         {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
+          <li stlye={{ color: "white" }} key={idx}>
+            {error}
+          </li>
         ))}
       </ul>
-      <label className="navlink">
+      <label>
         Email
         <input
           type="text"
@@ -46,7 +48,7 @@ function SignupFormPage() {
           required
         />
       </label>
-      <label className="navlink">
+      <label>
         Username
         <input
           type="text"
@@ -55,7 +57,7 @@ function SignupFormPage() {
           required
         />
       </label>
-      <label className="navlink">
+      <label>
         Password
         <input
           type="password"
@@ -64,7 +66,7 @@ function SignupFormPage() {
           required
         />
       </label>
-      <label className="navlink">
+      <label>
         Confirm Password
         <input
           type="password"

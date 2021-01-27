@@ -1,7 +1,7 @@
 // backend/routes/api/users.js
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const asyncHandler = require("express-async-handler");
-const { User } = require("../../db/models");
+const { User, Profile } = require("../../db/models");
 const express = require("express");
 const router = express.Router();
 const { check } = require("express-validator");
@@ -31,6 +31,13 @@ router.post(
   asyncHandler(async (req, res) => {
     const { email, password, username } = req.body;
     const user = await User.signup({ email, username, password });
+
+    const userProfile = await Profile.create({
+      profilePicture: "default",
+      headerImage: "default",
+      bio: "default",
+      userId: user.id,
+    });
 
     await setTokenCookie(res, user);
 

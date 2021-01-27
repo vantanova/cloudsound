@@ -85,7 +85,7 @@ function UploadPage() {
 
   return (
     <Layout className="layout">
-      <Content>
+      <Content style={{ backgroundColor: "#edeeef", marginTop: "0px" }}>
         {/* <div className="site-layout-content">Content</div> */}
         <div className="centered">
           <div className="uploadBox">

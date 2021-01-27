@@ -28,19 +28,17 @@ function ProfilePage() {
   }, []);
 
   return (
-    <div className="layout">
+    <Layout style={{ background: "none" }}>
       {/* <ProfileHeader data={data}></ProfileHeader> */}
-      <Layout>
-        <Layout>
-          <Content>
-            <div>
-              <p>Hello</p>
-            </div>
-          </Content>
-        </Layout>
-        <Footer></Footer>
+      <Layout style={{ background: "none" }}>
+        <Content style={{ backgroundColor: "#edeeef", marginTop: "0px" }}>
+          <div>
+            <p>Hello</p>
+          </div>
+        </Content>
       </Layout>
-    </div>
+      <Footer></Footer>
+    </Layout>
   );
 }
 

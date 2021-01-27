@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { message } from "antd";
+import "antd/dist/antd.css";
 import "./LoginForm.css";
 
 function LoginFormPage() {
@@ -17,6 +19,7 @@ function LoginFormPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
+    message.success("Signed in successfully!");
     return dispatch(sessionActions.login({ credential, password })).catch(
       (res) => {
         if (res.data && res.data.errors) setErrors(res.data.errors);
@@ -31,7 +34,7 @@ function LoginFormPage() {
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <label className="navlink">
+      <label>
         Username or Email
         <input
           type="text"
@@ -40,7 +43,7 @@ function LoginFormPage() {
           required
         />
       </label>
-      <label className="navlink">
+      <label>
         Password
         <input
           type="password"

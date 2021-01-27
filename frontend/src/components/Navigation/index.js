@@ -12,9 +12,21 @@ const { SubMenu } = Menu;
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  let navLinks;
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = <ProfileButton user={sessionUser} />;
+    navLinks = (
+      <>
+        <Menu.Item key="Profile">
+          <NavLink to="/profile">Profile</NavLink>
+        </Menu.Item>
+
+        <Menu.Item key="Upload">
+          <NavLink to="/upload">Upload</NavLink>
+        </Menu.Item>
+      </>
+    );
   } else {
     sessionLinks = (
       <>
@@ -34,33 +46,6 @@ function Navigation({ isLoaded }) {
   };
 
   return (
-    // <div>
-    //   <ul className="navbar">
-    //     <li className="logoText">
-    //       <h1>CloudSound</h1>
-    //     </li>
-    //     <li>
-    //       <NavLink className="navlink" exact to="/">
-    //         Home
-    //         {/* <Button>Home</Button> */}
-    //       </NavLink>
-    //       {sessionUser && (
-    //         <NavLink className="navlink" to="/profile">
-    //           {/* <Button>Profile</Button> */}
-    //           Profile
-    //         </NavLink>
-    //       )}
-    //       {sessionUser && (
-    //         <NavLink className="navlink" to="/upload">
-    //           {/* <Button type="primary">Upload</Button> */}
-    //           Upload
-    //         </NavLink>
-    //       )}
-    //     </li>
-    //     <li>{isLoaded && sessionLinks}</li>
-    //   </ul>
-    // </div>
-
     <div>
       <Menu mode="horizontal" theme="dark" style={{ background: "#161617" }}>
         <Menu.Item key="Logo" style={{ width: 200 }}>
@@ -75,15 +60,9 @@ function Navigation({ isLoaded }) {
           </NavLink>
         </Menu.Item>
 
-        <Menu.Item key="Profile">
-          <NavLink to="/profile">Profile</NavLink>
-        </Menu.Item>
+        {isLoaded && sessionUser && navLinks}
 
-        <Menu.Item key="Upload">
-          <NavLink to="/upload">Upload</NavLink>
-        </Menu.Item>
-
-        {sessionUser ? (
+        {isLoaded && sessionUser ? (
           <SubMenu
             key="SubMenu"
             title={sessionUser.username}

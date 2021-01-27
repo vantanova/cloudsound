@@ -1,0 +1,18 @@
+.slider {
+  -webkit-appearance: none;
+  width: 50%;
+  height: 25px;
+  background: rgb(55, 55, 58);
+  outline: none;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+}

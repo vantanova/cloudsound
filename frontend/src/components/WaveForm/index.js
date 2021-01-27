@@ -1,4 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Button, Slider } from "antd";
+import "./index.css";
+
+import "antd/dist/antd.css";
 
 import WaveSurfer from "wavesurfer.js";
 
@@ -72,8 +76,18 @@ export function Waveform({ url }) {
     <div>
       <div id="waveform" ref={waveformRef} />
       <div className="controls">
-        <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
+        <Button
+          style={{
+            background: "rgb(22, 22, 23)",
+            color: "rgba(255, 255, 255, 0.65)",
+            borderColor: "#001529",
+          }}
+          onClick={handlePlayPause}
+        >
+          {!playing ? "Play" : "Pause"}
+        </Button>
         <input
+          className="slider"
           type="range"
           id="volume"
           name="volume"
@@ -85,7 +99,6 @@ export function Waveform({ url }) {
           onChange={onVolumeChange}
           defaultValue={volume}
         />
-        <label htmlFor="volume">Volume</label>
       </div>
     </div>
   );

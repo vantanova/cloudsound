@@ -45,6 +45,9 @@ function ProfilePage() {
       profileData.profilePicture =
         "https://cloudsoundappbucket.s3-us-west-1.amazonaws.com/logo.png";
     }
+    if (profileData.bio === "default") {
+      profileData.bio = "Welcome to my page!";
+    }
     console.log(profileData);
   }
 
@@ -157,7 +160,17 @@ function ProfilePage() {
           </div>
 
           <Row>
-            <Col span={8} style={{ height: "7rem" }}></Col>
+            <Col
+              span={8}
+              style={{
+                height: "10rem",
+                marginTop: "70px",
+                paddingLeft: "30px",
+              }}
+            >
+              <h5>About Me</h5>
+              {data && <p>{profileData.bio}</p>}
+            </Col>
             <Col span={16} style={{ paddingRight: "10px" }}>
               <div
                 style={{

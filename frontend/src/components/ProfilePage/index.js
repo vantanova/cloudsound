@@ -2,7 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetch } from "../../store/csrf";
-import { Layout, Row, Col, Upload, message, Input, Image } from "antd";
+import { EditOutlined } from "@ant-design/icons";
+import Waveform from "../WaveForm/index";
+import {
+  Layout,
+  Row,
+  Col,
+  Upload,
+  message,
+  Input,
+  Image,
+  Button,
+  Menu,
+  Dropdown,
+  Skeleton,
+} from "antd";
 import "./Header.css";
 import "antd/dist/antd.css";
 
@@ -34,6 +48,29 @@ function ProfilePage() {
     console.log(profileData);
   }
 
+  const menu = (
+    <Menu>
+      <Menu.Item icon={<EditOutlined />}>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="http://www.alipay.com/"
+        >
+          Profile Photo
+        </a>
+      </Menu.Item>
+      <Menu.Item icon={<EditOutlined />}>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="http://www.taobao.com/"
+        >
+          Header Photo
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
+
   useEffect(() => {
     profileFetch();
   }, []);
@@ -44,13 +81,17 @@ function ProfilePage() {
         style={{
           background: "none",
           padding: "none",
+          display: "flex",
+          justifyContent: "center",
+          width: "100%",
         }}
+        height={1000}
       >
         <Content
+          width={1000}
           style={{
             backgroundColor: "#edeeef",
             marginTop: "0px",
-            maxWidth: "800px",
           }}
         >
           <div
@@ -69,10 +110,10 @@ function ProfilePage() {
                   zIndex: "2",
                   position: "absolute",
                 }}
-                width={"25%"}
+                width={"200px"}
                 src={profileData.profilePicture}
                 loading="true"
-                preview="true"
+                preview="false"
                 placeholder="true"
               ></Image>
             ) : (
@@ -82,24 +123,57 @@ function ProfilePage() {
                   zIndex: "2",
                   position: "absolute",
                 }}
-                width={"25%"}
+                preview="false"
+                width={"200px"}
                 src={
                   "https://cloudsoundappbucket.s3-us-west-1.amazonaws.com/logo.png"
                 }
                 placeholder="true"
               ></Image>
             )}
-
             <Row>
-              <Col span={8}></Col>
-              <Col span={4}>
-                <p> Hello </p>
+              <Col
+                span={23}
+                style={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <Dropdown overlay={menu} placement="bottomCenter">
+                  <Button
+                    style={{
+                      background: "rgb(22, 22, 23)",
+                      color: "rgba(255, 255, 255, 0.65)",
+                      borderColor: "#001529",
+                    }}
+                  >
+                    Edit
+                  </Button>
+                </Dropdown>
+              </Col>
+            </Row>
+            <Row className="title">
+              <Col span={24}>
+                {data ? <h1>{username}</h1> : <Skeleton paragraph={false} />}
               </Col>
             </Row>
           </div>
+
+          <Row>
+            <Col span={8} style={{ height: "7rem" }}></Col>
+            <Col span={16} style={{ paddingRight: "10px" }}>
+              <div
+                style={{
+                  height: "10rem",
+                  backgroundColor: "rgb(22, 22, 23)",
+                  borderRadius: "15px",
+                  paddingLeft: "10px",
+                  marginTop: "10px",
+                }}
+              >
+                <Waveform></Waveform>
+              </div>
+            </Col>
+          </Row>
         </Content>
       </Layout>
-      <Footer></Footer>
     </Layout>
   );
 }

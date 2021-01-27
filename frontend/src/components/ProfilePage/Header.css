@@ -7,3 +7,14 @@
 .flexbox {
   height: 100%;
 }
+
+.title {
+  display: flex;
+  align-items: flex-end;
+  height: 70%;
+  margin-left: 250px;
+}
+
+.title h1 {
+  color: rgb(237, 238, 239);
+}

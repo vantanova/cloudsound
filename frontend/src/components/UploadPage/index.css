@@ -5,9 +5,10 @@
 }
 
 .ant-layout-content {
-  margin: 50px;
+  margin: auto;
   background: #fff;
   height: 300px;
+  min-width: 75%;
 }
 
 body {

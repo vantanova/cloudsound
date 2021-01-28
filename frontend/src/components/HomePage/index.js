@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { fetch } from "../../store/csrf";
 import SongCard from "../SongCard";
 import VideoHeader from "../VideoHeader";
+import "./index.css";
 
 function HomePage() {
   const [data, setData] = useState();
@@ -25,9 +26,9 @@ function HomePage() {
   }, []);
 
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <VideoHeader></VideoHeader>
-      <p style={{ color: "white" }}>Hello</p>
+      <SongCard data={data}></SongCard>
     </div>
   );
 }

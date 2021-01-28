@@ -65,7 +65,13 @@ function ProfilePage() {
   }, []);
 
   return (
-    <Layout style={{ background: "none", padding: "none" }}>
+    <Layout
+      style={{
+        background: "none",
+        padding: "none",
+        height: "90vh",
+      }}
+    >
       <Layout
         style={{
           background: "none",

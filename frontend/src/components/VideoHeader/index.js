@@ -18,10 +18,11 @@ function VideoHeader() {
         />
       </video>
       <div
+        id="scroll"
         style={{
           color: "white",
           position: "absolute",
-          zIndex: "100",
+          zIndex: "50",
           marginTop: "-50%",
           marginLeft: "30%",
         }}

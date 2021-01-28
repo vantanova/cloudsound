@@ -1,6 +1,5 @@
 import React from "react";
 // import { NavLink } from "react-router-dom";
-import "antd/dist/antd.css";
 import "./index.css";
 import { Card } from "antd";
 const { Meta } = Card;
@@ -19,13 +18,19 @@ function SongCard({ data }) {
     <div style={{ width: 150, marginLeft: 10 }}>
       {songData ? (
         <Card
-          style={{ width: 150 }}
+          style={{
+            color: "white",
+            width: 150,
+          }}
           cover={<img alt="example" src={songData.image} />}
+          bordered={false}
         >
-          <Meta title={songData.title} />
+          <Meta style={{ color: "white" }} title={songData.title}>
+            <p style={{ color: "white" }}>{songData.title}</p>
+          </Meta>
         </Card>
       ) : (
-        <Card style={{ width: 200 }} loading={true} />
+        <Card bordered={false} style={{ width: 200 }} loading={true} />
       )}
     </div>
   );

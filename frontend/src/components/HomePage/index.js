@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 import { fetch } from "../../store/csrf";
 import SongCard from "../SongCard";
 import VideoHeader from "../VideoHeader";
+import { Input } from "antd";
 import "./index.css";
+import "antd/dist/antd.css";
+
+const { Search } = Input;
 
 function HomePage() {
   const [data, setData] = useState();

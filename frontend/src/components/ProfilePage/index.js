@@ -106,7 +106,7 @@ function ProfilePage() {
                   marginLeft: "1vh",
                   marginTop: "4vh",
                 }}
-                width={"17vh"}
+                width={"10rem"}
                 src={profileData.profilePicture}
                 loading="true"
                 preview="false"
@@ -121,7 +121,7 @@ function ProfilePage() {
                   marginTop: "4vh",
                 }}
                 preview="false"
-                width={"17vh"}
+                width={"10rem"}
                 src={
                   "https://cloudsoundappbucket.s3-us-west-1.amazonaws.com/logo.png"
                 }
@@ -134,7 +134,6 @@ function ProfilePage() {
                 style={{
                   display: "flex",
                   justifyContent: "flex-end",
-                  marginTop: "6vh",
                 }}
               >
                 <Dropdown overlay={menu} placement="bottomCenter">
@@ -143,6 +142,7 @@ function ProfilePage() {
                       background: "rgb(22, 22, 23)",
                       color: "rgba(255, 255, 255, 0.65)",
                       borderColor: "#001529",
+                      marginTop: "3rem",
                     }}
                   >
                     Edit

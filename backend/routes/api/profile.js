@@ -5,6 +5,7 @@ const asyncHandler = require("express-async-handler");
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
 const { User, Profile } = require("../../db/models");
 const { use } = require("./session");
+const { singlePublicFileUpload, singleMulterUpload } = require("../../awsS3");
 
 router.get(
   "/:id",
@@ -15,11 +16,18 @@ router.get(
       include: [{ model: Profile }],
     });
 
-    console.log(userFiles);
-
     return res.json({
       userFiles,
     });
+  })
+);
+
+router.post(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    console.log("`````````````````````", req.file.filename);
+    const profileImageUrl = await singlePublicFileUpload(req.file);
+    return res.json({});
   })
 );
 

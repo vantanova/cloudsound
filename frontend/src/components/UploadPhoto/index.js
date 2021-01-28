@@ -2,21 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { fetch } from "../../store/csrf";
 import { Col, Row, Modal, Button, Upload, message, Input } from "antd";
-import {
-  PlusOutlined,
-  LoadingOutlined,
-  InboxOutlined,
-} from "@ant-design/icons";
+import { PlusOutlined, LoadingOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
-
-const { Dragger } = Upload;
 
 function UploadPhoto({ data }) {
   const [imageLoading, setImageLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [file, setFile] = useState("");
   const sessionUser = useSelector((state) => state.session.user);
+  const { loading, imageUrl } = imageLoading;
   const userId = sessionUser.id;
-  console.log(userId);
 
   function getBase64(img, callback) {
     const reader = new FileReader();
@@ -24,46 +19,6 @@ function UploadPhoto({ data }) {
     reader.readAsDataURL(img);
   }
 
-  function beforeUpload(file) {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-    }
-    return isJpgOrPng && isLt2M;
-  }
-
-  function handleChange(info) {
-    if (info.file.status === "uploading") {
-      setImageLoading({ loading: true });
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      console.log(info);
-      getBase64(info.file.originFileObj, (imageUrl) =>
-        setImageLoading({
-          imageUrl,
-          loading: false,
-        })
-      );
-    }
-  }
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const { loading, imageUrl } = imageLoading;
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -71,10 +26,66 @@ function UploadPhoto({ data }) {
     </div>
   );
 
-  const props = {
-    name: "file",
-    multiple: false,
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  //   function handleChange(info) {
+  //     if (info.file.status === "uploading") {
+  //       setImageLoading({ loading: true });
+  //       return;
+  //     }
+  //     if (info.file.status === "done") {
+  //       setFile(info.file);
+  //       getBase64(info.file.originFileObj, (imageUrl) =>
+  //         setImageLoading({
+  //           imageUrl,
+  //           loading: false,
+  //         })
+  //       );
+  //     }
+  //   }
+  function handleUpload(e) {
+    setFile(e.target.files[0]);
+    setImageLoading({
+      imageUrl,
+      loading: false,
+    });
+  }
+
+  function handleSubmit(e) {
+    const formData = new FormData();
+    console.log(formData);
+    formData.append("file", file);
+    profilePicturePost(`/api/profile/${userId}`, formData);
+    setIsModalVisible(false);
+  }
+
+  // console.log(imageUrl);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleOk = () => {
+    profilePicturePost(`/api/profile/${userId}`, file);
+  };
+
+  function dummyRequest({ imageUrl, onSuccess }) {
+    setTimeout(() => {
+      onSuccess("OK");
+    }, 0);
+  }
+
+  async function profilePicturePost(url, insertFile) {
+    console.log(insertFile);
+
+    const res = await fetch(url, {
+      method: "POST",
+      body: insertFile,
+    });
+    if (res.ok) {
+      return await res.data;
+    }
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   useEffect(() => {
@@ -89,26 +100,32 @@ function UploadPhoto({ data }) {
       <Modal
         title="Upload a Photo"
         visible={isModalVisible}
-        onOk={handleOk}
+        onOk={handleSubmit}
         onCancel={handleCancel}
       >
         <Row>
           <Col span={6}>
-            <Upload
+            {/* <Upload
               name="avatar"
               listType="picture-card"
               className="avatar-uploader"
               showUploadList={false}
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              beforeUpload={beforeUpload}
-              onChange={handleChange}
+              onChange={handleUpload}
+              customRequest={dummyRequest}
+              type="file"
             >
               {imageUrl ? (
                 <img src={imageUrl} alt="avatar" style={{ width: "50%" }} />
               ) : (
                 uploadButton
               )}
-            </Upload>
+            </Upload> */}
+            <input type="file" onChange={handleUpload}></input>
+            {imageUrl ? (
+              <img src={imageUrl} alt="avatar" style={{ width: "50%" }} />
+            ) : (
+              uploadButton
+            )}
           </Col>
           <Col span={16} style={{ padding: "5px" }}>
             <p>Select a new {data[0]}.</p>

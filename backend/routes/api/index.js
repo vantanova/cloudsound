@@ -10,8 +10,6 @@ router.use("/profile", profileRouter);
 router.use("/users", usersRouter);
 router.use("/", homeRouter);
 
-module.exports = router;
-
 router.post("/test", function (req, res) {
   res.json({ requestBody: req.body });
 });

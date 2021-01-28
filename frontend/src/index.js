@@ -7,6 +7,7 @@ import App from "./App";
 import configureStore from "./store";
 import { restoreCSRF, fetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
+import { PageTransition } from "@steveeeie/react-page-transition";
 
 const store = configureStore();
 

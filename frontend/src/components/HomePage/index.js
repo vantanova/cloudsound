@@ -1,23 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { fetch } from "../../store/csrf";
-import MusicCarousel from "../MusicCarousel";
 import SongCard from "../SongCard";
 import VideoHeader from "../VideoHeader";
-import {
-  Layout,
-  Row,
-  Col,
-  Upload,
-  message,
-  Input,
-  Image,
-  Button,
-  Menu,
-  Dropdown,
-  Skeleton,
-} from "antd";
-import "antd/dist/antd.css";
 
 function HomePage() {
   const [data, setData] = useState();

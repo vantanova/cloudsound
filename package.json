@@ -23,6 +23,11 @@
   },
   "homepage": "https://github.com/vantanova/cloudsound#readme",
   "dependencies": {
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-tiger-transition": "^4.1.2",
+    "react-transition-group": "^4.4.1",
+    "styled-components": "^5.2.1",
     "wavesurfer.js": "^4.4.0"
   }
 }

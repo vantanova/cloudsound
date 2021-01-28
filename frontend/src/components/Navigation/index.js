@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import { Menu } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import "antd/dist/antd.css";

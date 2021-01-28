@@ -9,7 +9,6 @@ function VideoHeader() {
         muted
         autoPlay="autoplay"
         width="100%"
-        objectFit="cover"
         duration="5"
         style={{ position: "relative" }}
       >

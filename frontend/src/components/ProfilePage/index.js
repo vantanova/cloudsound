@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { fetch } from "../../store/csrf";
 import { EditOutlined } from "@ant-design/icons";
 import Waveform from "../WaveForm/index";
@@ -8,9 +8,6 @@ import {
   Layout,
   Row,
   Col,
-  Upload,
-  message,
-  Input,
   Image,
   Button,
   Menu,
@@ -22,8 +19,8 @@ import "antd/dist/antd.css";
 import UploadPhoto from "../UploadPhoto";
 
 function ProfilePage() {
-  const { Header, Footer, Sider, Content } = Layout;
-  let history = useHistory();
+  const { Content } = Layout;
+  // let history = useHistory();
   const [data, setData] = useState();
   const sessionUser = useSelector((state) => state.session.user);
   let username;

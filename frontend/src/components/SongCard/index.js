@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
+// import { NavLink } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./index.css";
-import { Card, Avatar } from "antd";
+import { Card } from "antd";
 const { Meta } = Card;
 
 function SongCard({ data }) {

@@ -28,7 +28,7 @@ function LoginFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form style={{ marginTop: "100px" }} onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>

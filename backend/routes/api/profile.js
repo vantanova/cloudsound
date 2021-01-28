@@ -24,10 +24,21 @@ router.get(
 
 router.post(
   "/:id",
+  singleMulterUpload("image"),
   asyncHandler(async (req, res, next) => {
-    console.log("`````````````````````", req.file.filename);
+    const userProfileId = parseInt(req.params.id);
+    console.log("`````````````````````", req);
     const profileImageUrl = await singlePublicFileUpload(req.file);
-    return res.json({});
+    Profile.update(
+      { profilePicture: profileImageUrl },
+      {
+        where: {
+          userId: userProfileId,
+        },
+      }
+    );
+
+    return res.json({ profileImageUrl });
   })
 );
 

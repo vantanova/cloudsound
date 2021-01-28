@@ -84,7 +84,7 @@ function UploadPage() {
   }, []);
 
   return (
-    <Layout className="layout" style={{ background: "none" }}>
+    <Layout className="layout" style={{ background: "none", height: "90vh" }}>
       <Content style={{ backgroundColor: "#edeeef", marginTop: "0px" }}>
         {/* <div className="site-layout-content">Content</div> */}
         <div
@@ -94,9 +94,20 @@ function UploadPage() {
             backgroundSize: "cover",
             zIndex: "1",
             width: "100%",
+            display: "flex",
+            alignItems: "flex-end",
           }}
         >
-          <h2 style={{ color: "white" }}>Upload a Song 🎵</h2>
+          <h2
+            style={{
+              color: "white",
+              marginLeft: "4vh",
+              marginBottom: "2vh",
+              fontSize: "2.5rem",
+            }}
+          >
+            Upload a Song
+          </h2>
         </div>
         <div className="centered">
           <div className="uploadBox">
@@ -127,14 +138,10 @@ function UploadPage() {
                 </Upload>
               </Col>
             </Row>
-            <Row style={{ height: "50px" }}>
-              <Col span={12}></Col>
-              <Col span={12}></Col>
-            </Row>
             <Row>
               <Col span={3}></Col>
               <Col
-                span={16}
+                span={10}
                 style={{ display: "flex", justifyContent: "center" }}
               >
                 <h3>Audio</h3>
@@ -142,7 +149,6 @@ function UploadPage() {
               <Col span={3}></Col>
             </Row>
             <Row>
-              <Col span={3}></Col>
               <Col span={16}>
                 <Dragger {...props} onChange={onChange}>
                   <p className="ant-upload-drag-icon">

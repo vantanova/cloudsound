@@ -101,11 +101,12 @@ function ProfilePage() {
             {data ? (
               <Image
                 style={{
-                  margin: "25px",
                   zIndex: "2",
                   position: "absolute",
+                  marginLeft: "1vh",
+                  marginTop: "4vh",
                 }}
-                width={"200px"}
+                width={"17vh"}
                 src={profileData.profilePicture}
                 loading="true"
                 preview="false"
@@ -114,12 +115,13 @@ function ProfilePage() {
             ) : (
               <Image
                 style={{
-                  margin: "25px",
                   zIndex: "2",
                   position: "absolute",
+                  marginLeft: "1vh",
+                  marginTop: "4vh",
                 }}
                 preview="false"
-                width={"200px"}
+                width={"17vh"}
                 src={
                   "https://cloudsoundappbucket.s3-us-west-1.amazonaws.com/logo.png"
                 }
@@ -129,7 +131,11 @@ function ProfilePage() {
             <Row>
               <Col
                 span={23}
-                style={{ display: "flex", justifyContent: "flex-end" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginTop: "6vh",
+                }}
               >
                 <Dropdown overlay={menu} placement="bottomCenter">
                   <Button
@@ -156,7 +162,7 @@ function ProfilePage() {
               span={8}
               style={{
                 height: "10rem",
-                marginTop: "70px",
+                marginTop: "4vh",
                 paddingLeft: "30px",
               }}
             >

@@ -13,34 +13,6 @@ function UploadPhoto({ data }) {
   const { loading, imageUrl } = imageLoading;
   const userId = sessionUser.id;
 
-  function getBase64(img, callback) {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result));
-    reader.readAsDataURL(img);
-  }
-
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
-
-  //   function handleChange(info) {
-  //     if (info.file.status === "uploading") {
-  //       setImageLoading({ loading: true });
-  //       return;
-  //     }
-  //     if (info.file.status === "done") {
-  //       setFile(info.file);
-  //       getBase64(info.file.originFileObj, (imageUrl) =>
-  //         setImageLoading({
-  //           imageUrl,
-  //           loading: false,
-  //         })
-  //       );
-  //     }
-  //   }
   function handleUpload(e) {
     setFile(e.target.files[0]);
     setImageLoading({
@@ -48,49 +20,40 @@ function UploadPhoto({ data }) {
       loading: false,
     });
   }
+  console.log(file);
 
   function handleSubmit(e) {
+    e.preventDefault();
     const formData = new FormData();
-    console.log(formData);
-    formData.append("file", file);
+    formData.append("image", file);
+    for (var value of formData.values()) {
+      console.log("---------------------------", value);
+    }
     profilePicturePost(`/api/profile/${userId}`, formData);
     setIsModalVisible(false);
   }
 
-  // console.log(imageUrl);
-
   const showModal = () => {
     setIsModalVisible(true);
   };
-  const handleOk = () => {
-    profilePicturePost(`/api/profile/${userId}`, file);
-  };
-
-  function dummyRequest({ imageUrl, onSuccess }) {
-    setTimeout(() => {
-      onSuccess("OK");
-    }, 0);
-  }
 
   async function profilePicturePost(url, insertFile) {
-    console.log(insertFile);
+    insertFile["originalname"] = insertFile["name"];
 
     const res = await fetch(url, {
       method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
       body: insertFile,
     });
-    if (res.ok) {
-      return await res.data;
-    }
   }
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
-  useEffect(() => {
-    // profileFetch();
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -105,27 +68,10 @@ function UploadPhoto({ data }) {
       >
         <Row>
           <Col span={6}>
-            {/* <Upload
-              name="avatar"
-              listType="picture-card"
-              className="avatar-uploader"
-              showUploadList={false}
-              onChange={handleUpload}
-              customRequest={dummyRequest}
-              type="file"
-            >
-              {imageUrl ? (
-                <img src={imageUrl} alt="avatar" style={{ width: "50%" }} />
-              ) : (
-                uploadButton
-              )}
-            </Upload> */}
-            <input type="file" onChange={handleUpload}></input>
-            {imageUrl ? (
-              <img src={imageUrl} alt="avatar" style={{ width: "50%" }} />
-            ) : (
-              uploadButton
-            )}
+            <form encType="multipart/form-data" onSubmit={handleSubmit}>
+              <input type="file" name="file" onChange={handleUpload}></input>
+              {/* <button type="submit">Submit</button> */}
+            </form>
           </Col>
           <Col span={16} style={{ padding: "5px" }}>
             <p>Select a new {data[0]}.</p>

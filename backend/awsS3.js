@@ -4,6 +4,8 @@ const NAME_OF_BUCKET = "cloudsoundappbucket";
 
 const multer = require("multer");
 
+multer({ limits: { fileSize: 2097152 } });
+
 //  make sure to set environment variables in production for:
 //  AWS_ACCESS_KEY_ID
 //  AWS_SECRET_ACCESS_KEY

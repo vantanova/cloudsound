@@ -87,9 +87,19 @@ function UploadPage() {
     <Layout className="layout" style={{ background: "none" }}>
       <Content style={{ backgroundColor: "#edeeef", marginTop: "0px" }}>
         {/* <div className="site-layout-content">Content</div> */}
+        <div
+          className="header"
+          style={{
+            backgroundImage: `url("https://cloudsoundappbucket.s3-us-west-1.amazonaws.com/Default-Banner.png")`,
+            backgroundSize: "cover",
+            zIndex: "1",
+            width: "100%",
+          }}
+        >
+          <h2 style={{ color: "white" }}>Upload a Song 🎵</h2>
+        </div>
         <div className="centered">
           <div className="uploadBox">
-            <h2>Upload a Song 🎵</h2>
             <Row>
               <Col span={14}>
                 <h4>Song Title</h4>

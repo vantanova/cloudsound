@@ -3,6 +3,21 @@ import { useSelector } from "react-redux";
 import { fetch } from "../../store/csrf";
 import MusicCarousel from "../MusicCarousel";
 import SongCard from "../SongCard";
+import VideoHeader from "../VideoHeader";
+import {
+  Layout,
+  Row,
+  Col,
+  Upload,
+  message,
+  Input,
+  Image,
+  Button,
+  Menu,
+  Dropdown,
+  Skeleton,
+} from "antd";
+import "antd/dist/antd.css";
 
 function HomePage() {
   const [data, setData] = useState();
@@ -26,8 +41,8 @@ function HomePage() {
 
   return (
     <div>
-      <MusicCarousel></MusicCarousel>
-      <SongCard data={data}></SongCard>
+      <VideoHeader></VideoHeader>
+      <p style={{ color: "white" }}>Hello</p>
     </div>
   );
 }

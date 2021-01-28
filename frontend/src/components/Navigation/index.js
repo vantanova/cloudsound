@@ -46,14 +46,14 @@ function Navigation({ isLoaded }) {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        position: "fixed",
+        width: "100%",
+        zIndex: "100",
+      }}
+    >
       <Menu mode="horizontal" theme="dark" style={{ background: "#161617" }}>
-        <Menu.Item key="Logo" style={{ width: 200 }}>
-          <NavLink exact to="/">
-            CloudSound
-          </NavLink>
-        </Menu.Item>
-
         <Menu.Item key="Home">
           <NavLink exact to="/">
             Home

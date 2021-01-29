@@ -25,19 +25,18 @@ router.get(
 router.put(
   "/:id",
   asyncHandler(async (req, res, next) => {
+    console.log(req.body);
     console.log("hit");
-    // const userId = parseInt(req.params.id);
-    // Profile.update(
-    //   { profilePicture: profileImageUrl },
-    //   {
-    //     where: {
-    //       userId: userProfileId,
-    //     },
-    //   }
-    // );
-    // return res.json({
-    //   userFiles,
-    // });
+    const userProfileId = parseInt(req.params.id);
+    Profile.update(
+      { bio: req.body.text },
+      {
+        where: {
+          userId: userProfileId,
+        },
+      }
+    );
+    return res.json({});
   })
 );
 

@@ -84,7 +84,12 @@ function UploadPage() {
   }, []);
 
   return (
-    <Layout className="layout" style={{ background: "none", height: "90vh" }}>
+    <Layout
+      className="layout"
+      style={{ background: "none", height: "100vh", paddingBottom: "10vh" }}
+    >
+      {" "}
+      height: "100vh", paddingBottom: "10vh",
       <Content style={{ backgroundColor: "#edeeef", marginTop: "0px" }}>
         {/* <div className="site-layout-content">Content</div> */}
         <div

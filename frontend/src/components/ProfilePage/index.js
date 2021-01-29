@@ -90,7 +90,8 @@ function ProfilePage() {
       style={{
         background: "none",
         padding: "none",
-        height: "90vh",
+        height: "100vh",
+        paddingBottom: "10vh",
       }}
     >
       <Layout

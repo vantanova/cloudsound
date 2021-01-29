@@ -4,6 +4,7 @@ import * as sessionProfileActions from "../../store/profile";
 import { fetch } from "../../store/csrf";
 import SongCard from "../SongCard";
 import VideoHeader from "../VideoHeader";
+import HomeDivider from "../HomeDivider";
 import { Input } from "antd";
 import "./index.css";
 import "antd/dist/antd.css";
@@ -35,6 +36,7 @@ function HomePage() {
   return (
     <div style={{ height: "100%" }}>
       <VideoHeader></VideoHeader>
+      <HomeDivider></HomeDivider>
       <SongCard data={data}></SongCard>
     </div>
   );

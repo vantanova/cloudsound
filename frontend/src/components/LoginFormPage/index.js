@@ -64,7 +64,7 @@ function LoginFormPage() {
   };
 
   return (
-    <>
+    <div style={{ height: "100vh" }}>
       <Drawer
         title="Login to your account"
         width={"40vh"}
@@ -147,7 +147,7 @@ function LoginFormPage() {
           </Row>
         </Form>
       </Drawer>
-    </>
+    </div>
     // <form style={{ marginTop: "100px" }} onSubmit={handleSubmit}>
     //   <ul>
     //     {errors.map((error, idx) => (

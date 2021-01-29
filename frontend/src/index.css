@@ -14,10 +14,9 @@
 }
 
 #root {
-  height: 200%;
+  height: auto;
   background-image: url("https://cloudsoundappbucket.s3-us-west-1.amazonaws.com/repeated-square-dark.png");
   background-repeat: repeat;
-  /* background-color: #161617; */
 }
 
 .layout {

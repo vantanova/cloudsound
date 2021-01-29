@@ -54,94 +54,96 @@ function SignupFormPage() {
   };
 
   return (
-    <Drawer
-      title="Create a new account"
-      closable={false}
-      width={720}
-      onClose={onClose}
-      visible={drawer}
-      bodyStyle={{ paddingBottom: 80 }}
-      headerStyle={{
-        backgroundColor: "rgb(22, 22, 23)",
-        color: "rgba(255, 255, 255, 0.65)",
-      }}
-      footer={
-        <div
-          style={{
-            textAlign: "right",
-          }}
-        >
-          <Button onClick={onClose} style={{ marginRight: 8 }}>
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} type="primary">
-            Submit
-          </Button>
-        </div>
-      }
-    >
-      <Form layout="vertical" hideRequiredMark>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              name="email"
-              label="Email"
-              rules={[{ required: true, message: "Please enter an email" }]}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            >
-              <Input placeholder="Please enter an email" />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              name="username"
-              label="Username"
-              rules={[{ required: true, message: "Please enter a username" }]}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            >
-              <Input placeholder="Please enter a username" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              name="password"
-              label="Password"
-              rules={[
-                { required: true, message: "Please enter your password" },
-              ]}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            >
-              <Input placeholder="Please enter your password" />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              name="confirm"
-              label="Confirm Password"
-              rules={[{ required: true, message: "Please enter a password" }]}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            >
-              <Input placeholder="Please enter a password" />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Space direction="vertical">
-              {errors.map((error, idx) => (
-                <Text type="danger" key={idx}>
-                  {error}
-                </Text>
-              ))}
-            </Space>
-          </Col>
-        </Row>
-      </Form>
-    </Drawer>
+    <div style={{ height: "100vh" }}>
+      <Drawer
+        title="Create a new account"
+        closable={false}
+        width={720}
+        onClose={onClose}
+        visible={drawer}
+        bodyStyle={{ paddingBottom: 80 }}
+        headerStyle={{
+          backgroundColor: "rgb(22, 22, 23)",
+          color: "rgba(255, 255, 255, 0.65)",
+        }}
+        footer={
+          <div
+            style={{
+              textAlign: "right",
+            }}
+          >
+            <Button onClick={onClose} style={{ marginRight: 8 }}>
+              Cancel
+            </Button>
+            <Button onClick={handleSubmit} type="primary">
+              Submit
+            </Button>
+          </div>
+        }
+      >
+        <Form layout="vertical" hideRequiredMark>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="email"
+                label="Email"
+                rules={[{ required: true, message: "Please enter an email" }]}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              >
+                <Input placeholder="Please enter an email" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="username"
+                label="Username"
+                rules={[{ required: true, message: "Please enter a username" }]}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              >
+                <Input placeholder="Please enter a username" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="password"
+                label="Password"
+                rules={[
+                  { required: true, message: "Please enter your password" },
+                ]}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              >
+                <Input placeholder="Please enter your password" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="confirm"
+                label="Confirm Password"
+                rules={[{ required: true, message: "Please enter a password" }]}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              >
+                <Input placeholder="Please enter a password" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Space direction="vertical">
+                {errors.map((error, idx) => (
+                  <Text type="danger" key={idx}>
+                    {error}
+                  </Text>
+                ))}
+              </Space>
+            </Col>
+          </Row>
+        </Form>
+      </Drawer>
+    </div>
     // <form onSubmit={handleSubmit} style={{ backgroundColor: "white" }}>
     //   <ul>
     //     {errors.map((error, idx) => (

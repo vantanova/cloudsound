@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // import { useHistory } from "react-router-dom";
+import * as sessionProfileActions from "../../store/profile";
 import { fetch } from "../../store/csrf";
 import { EditOutlined } from "@ant-design/icons";
 import Waveform from "../WaveForm/index";
@@ -13,32 +14,32 @@ import {
   Menu,
   Dropdown,
   Skeleton,
+  Input,
 } from "antd";
 import "./Header.css";
 import "antd/dist/antd.css";
 import UploadPhoto from "../UploadPhoto";
+const { TextArea } = Input;
 
 function ProfilePage() {
   const { Content } = Layout;
-  // let history = useHistory();
+  const dispatch = useDispatch();
   const [data, setData] = useState();
+  const [edit, setEdit] = useState(false);
+  const [username, setUsername] = useState();
+  const [profileData, setProfileData] = useState();
+  const [bio, setBio] = useState("");
   const sessionUser = useSelector((state) => state.session.user);
-  let username;
-  let profileData;
+  const sessionProfile = useSelector((state) => state.profile);
+  let profileDataBefore;
+  let sessionProfileData;
 
-  const userId = sessionUser.id;
-
-  async function profileFetch() {
-    const res = await fetch(`/api/profile/${userId}`);
-    if (res.ok) {
-      let data = await res.data;
-      setData(data);
-    }
+  if (sessionProfile) {
+    profileDataBefore = sessionProfile.profile.userFiles[0].username;
+    sessionProfileData = sessionProfile.profile.userFiles[0].Profile;
   }
 
-  if (data) {
-    username = data.userFiles[0].username;
-    profileData = data.userFiles[0].Profile;
+  if (profileData) {
     if (profileData.profilePicture === "default") {
       profileData.profilePicture =
         "https://cloudsoundappbucket.s3-us-west-1.amazonaws.com/logo.png";
@@ -46,23 +47,43 @@ function ProfilePage() {
     if (profileData.bio === "default") {
       profileData.bio = "Welcome to my page!";
     }
-    console.log(profileData);
   }
+
+  function onBioChange(e) {
+    setBio(e.target.value);
+  }
+
+  function onBioClick() {
+    if (edit) setEdit(false);
+    if (!edit) setEdit(true);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    profileBioUpdate(`/api/profile/${sessionUser.id}`, bio);
+  }
+
+  async function profileBioUpdate(url, text) {
+    const res = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify({
+        text,
+      }),
+    });
+  }
+
+  useEffect(() => {
+    setUsername(profileDataBefore);
+    setProfileData(sessionProfileData);
+  }, []);
 
   const menu = (
     <Menu>
       <Menu.Item icon={<EditOutlined />}>
         <UploadPhoto data={["Profile Photo"]}></UploadPhoto>
       </Menu.Item>
-      <Menu.Item icon={<EditOutlined />}>
-        <UploadPhoto data={["Header Photo"]}></UploadPhoto>
-      </Menu.Item>
     </Menu>
   );
-
-  useEffect(() => {
-    profileFetch();
-  }, []);
 
   return (
     <Layout
@@ -98,7 +119,7 @@ function ProfilePage() {
               zIndex: "1",
             }}
           >
-            {data ? (
+            {profileData ? (
               <Image
                 style={{
                   zIndex: "2",
@@ -152,7 +173,11 @@ function ProfilePage() {
             </Row>
             <Row className="title">
               <Col span={24}>
-                {data ? <h1>{username}</h1> : <Skeleton paragraph={false} />}
+                {profileData ? (
+                  <h1>{username}</h1>
+                ) : (
+                  <Skeleton paragraph={false} />
+                )}
               </Col>
             </Row>
           </div>
@@ -172,6 +197,7 @@ function ProfilePage() {
                   type="dashed"
                   shape="circle"
                   icon={<EditOutlined />}
+                  onClick={onBioClick}
                   style={{
                     display: "flex",
                     justifyContent: "center",
@@ -181,7 +207,28 @@ function ProfilePage() {
                   }}
                 ></Button>
               </div>
-              {data && <p>{profileData.bio}</p>}
+              {edit ? (
+                <>
+                  <TextArea
+                    onChange={onBioChange}
+                    style={{ width: "90%" }}
+                    rows={4}
+                  />
+                  <Button
+                    style={{
+                      backgroundColor: "rgb(22, 22, 23)",
+                      color: "rgba(255, 255, 255, 0.65)",
+                      float: "right",
+                      marginRight: "10%",
+                    }}
+                    onClick={handleSubmit}
+                  >
+                    Change Bio
+                  </Button>
+                </>
+              ) : (
+                profileData && <p>{profileData.bio}</p>
+              )}
             </Col>
             <Col span={16} style={{ paddingRight: "10px" }}>
               <div

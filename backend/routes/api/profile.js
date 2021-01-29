@@ -22,6 +22,25 @@ router.get(
   })
 );
 
+router.put(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    console.log("hit");
+    // const userId = parseInt(req.params.id);
+    // Profile.update(
+    //   { profilePicture: profileImageUrl },
+    //   {
+    //     where: {
+    //       userId: userProfileId,
+    //     },
+    //   }
+    // );
+    // return res.json({
+    //   userFiles,
+    // });
+  })
+);
+
 router.post(
   "/:id",
   singleMulterUpload("image"),

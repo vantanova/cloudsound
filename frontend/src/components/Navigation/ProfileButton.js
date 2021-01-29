@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
+import * as sessionProfileActions from "../../store/profile";
 import "./Navigation.css";
 import { Menu } from "antd";
 import "antd/dist/antd.css";
@@ -10,8 +11,6 @@ function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
-
-  console.log(sessionUser);
 
   // const openMenu = () => {
   //   if (showMenu) return;
@@ -32,7 +31,9 @@ function ProfileButton({ user }) {
 
   const logout = (e) => {
     e.preventDefault();
-    dispatch(sessionActions.logout());
+    console.log("-------------------------");
+    dispatch(sessionProfileActions.removeSessionProfile());
+    // dispatch(sessionActions.logout());
   };
 
   return (

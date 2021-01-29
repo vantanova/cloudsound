@@ -6,6 +6,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import ProfilePage from "./components/ProfilePage";
 import HomePage from "./components/HomePage";
 import * as sessionActions from "./store/session";
+import * as sessionProfileActions from "./store/profile";
 import Navigation from "./components/Navigation";
 import UploadPage from "./components/UploadPage";
 

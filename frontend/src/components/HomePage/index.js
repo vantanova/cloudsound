@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import * as sessionProfileActions from "../../store/profile";
 import { fetch } from "../../store/csrf";
 import SongCard from "../SongCard";
 import VideoHeader from "../VideoHeader";
@@ -11,9 +12,11 @@ const { Search } = Input;
 
 function HomePage() {
   const [data, setData] = useState();
+  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   if (sessionUser) {
     const userId = sessionUser.id;
+    dispatch(sessionProfileActions.profilePageFetch(userId));
   }
 
   async function homepageFetch() {

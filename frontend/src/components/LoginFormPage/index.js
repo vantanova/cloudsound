@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
 import { message } from "antd";
 import {
@@ -15,39 +15,49 @@ import {
   Select,
   DatePicker,
 } from "antd";
+import { Typography, Space } from "antd";
+
 import "antd/dist/antd.css";
 import "./LoginForm.css";
 
+const { Text, Link } = Typography;
 const { Option } = Select;
 
 function LoginFormPage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const [drawer, setDrawer] = useState({ visable: false });
+  const [drawer, setDrawer] = useState(true);
 
   if (sessionUser) return <Redirect to="/" />;
 
+  const validateMessages = {
+    required: `Username' is required!`,
+    // ...
+  };
+
   const showDrawer = () => {
-    setDrawer({
-      visible: true,
-    });
+    setDrawer(true);
   };
 
   const onClose = () => {
-    setDrawer({
-      visible: false,
-    });
+    setDrawer(false);
+    history.goBack();
+  };
+
+  const formSubmission = () => {
+    setDrawer(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    message.success("Signed in successfully!");
     return dispatch(sessionActions.login({ credential, password })).catch(
       (res) => {
+        console.log(res.data.errors);
         if (res.data && res.data.errors) setErrors(res.data.errors);
       }
     );
@@ -55,15 +65,18 @@ function LoginFormPage() {
 
   return (
     <>
-      <Button type="primary" onClick={showDrawer}>
-        <PlusOutlined /> New account
-      </Button>
       <Drawer
-        title="Create a new account"
-        width={720}
+        title="Login to your account"
+        width={"40vh"}
         onClose={onClose}
+        closable={false}
         visible={drawer}
         bodyStyle={{ paddingBottom: 80 }}
+        headerStyle={{
+          backgroundColor: "rgb(22, 22, 23)",
+          color: "rgba(255, 255, 255, 0.65)",
+        }}
+        style={{ color: "white" }}
         footer={
           <div
             style={{
@@ -73,111 +86,63 @@ function LoginFormPage() {
             <Button onClick={onClose} style={{ marginRight: 8 }}>
               Cancel
             </Button>
-            <Button onClick={onClose} type="primary">
-              Submit
+            <Button
+              onClick={handleSubmit}
+              type="primary"
+              style={{
+                background: "rgb(22, 22, 23)",
+                color: "rgba(255, 255, 255, 0.65)",
+                borderColor: "#001529",
+              }}
+            >
+              Login
             </Button>
           </div>
         }
       >
-        <Form layout="vertical" hideRequiredMark>
+        <Form layout="vertical" hideRequiredMark onSubmit={handleSubmit}>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={18}>
               <Form.Item
                 name="name"
-                label="Name"
-                rules={[{ required: true, message: "Please enter user name" }]}
-              >
-                <Input placeholder="Please enter user name" />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="url"
-                label="Url"
-                rules={[{ required: true, message: "Please enter url" }]}
-              >
-                <Input
-                  style={{ width: "100%" }}
-                  addonBefore="http://"
-                  addonAfter=".com"
-                  placeholder="Please enter url"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="owner"
-                label="Owner"
-                rules={[{ required: true, message: "Please select an owner" }]}
-              >
-                <Select placeholder="Please select an owner">
-                  <Option value="xiao">Xiaoxiao Fu</Option>
-                  <Option value="mao">Maomao Zhou</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="type"
-                label="Type"
-                rules={[{ required: true, message: "Please choose the type" }]}
-              >
-                <Select placeholder="Please choose the type">
-                  <Option value="private">Private</Option>
-                  <Option value="public">Public</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="approver"
-                label="Approver"
-                rules={[
-                  { required: true, message: "Please choose the approver" },
-                ]}
-              >
-                <Select placeholder="Please choose the approver">
-                  <Option value="jack">Jack Ma</Option>
-                  <Option value="tom">Tom Liu</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="dateTime"
-                label="DateTime"
-                rules={[
-                  { required: true, message: "Please choose the dateTime" },
-                ]}
-              >
-                <DatePicker.RangePicker
-                  style={{ width: "100%" }}
-                  getPopupContainer={(trigger) => trigger.parentElement}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                name="description"
-                label="Description"
+                label="Username or Email"
                 rules={[
                   {
                     required: true,
-                    message: "please enter url description",
+                    message: "Please enter user name or an email.",
                   },
                 ]}
+                value={credential}
+                onChange={(e) => setCredential(e.target.value)}
+                required
               >
-                <Input.TextArea
-                  rows={4}
-                  placeholder="please enter url description"
-                />
+                <Input placeholder="Please enter user name or an email." />
               </Form.Item>
+            </Col>
+            <Col span={12}></Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={18}>
+              <Form.Item
+                name="password"
+                label="Password"
+                rules={[
+                  { required: true, message: "Please enter your password" },
+                ]}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              >
+                <Input placeholder="Please enter a password." />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Space direction="vertical">
+                {errors.map((error, idx) => (
+                  <Text type="danger" key={idx}>
+                    {error}
+                  </Text>
+                ))}
+              </Space>
             </Col>
           </Row>
         </Form>

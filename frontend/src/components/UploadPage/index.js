@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { fetch } from "../../store/csrf";
-import { Layout, Row, Col, Upload, message, Input } from "antd";
+import { Layout, Row, Col, Upload, message, Input, Select, Button } from "antd";
 import {
   PlusOutlined,
   LoadingOutlined,
@@ -10,47 +10,72 @@ import {
 import "antd/dist/antd.css";
 import "./index.css";
 
+const { Option } = Select;
 const { Dragger } = Upload;
 const { Content, Footer } = Layout;
 
 function UploadPage() {
+  let mostRecent;
+  const [title, setTitle] = useState();
+  const [select, setSelect] = useState();
+  const [audioFile, setAudioFile] = useState();
+  const [photoFile, setPhotoFile] = useState();
+  const [photoImage, setPhotoImage] = useState();
   const [imageLoading, setImageLoading] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
   const userId = sessionUser.id;
-  console.log(userId);
 
-  function getBase64(img, callback) {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result));
-    reader.readAsDataURL(img);
+  async function songPost(url, insertFile) {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      body: insertFile,
+    });
   }
 
-  function beforeUpload(file) {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-    }
-    return isJpgOrPng && isLt2M;
+  function submitSong() {
+    console.log("yes");
   }
 
-  function handleChange(info) {
-    if (info.file.status === "uploading") {
-      setImageLoading({ loading: true });
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (imageUrl) =>
-        setImageLoading({
-          imageUrl,
-          loading: false,
-        })
-      );
-    }
+  function handleSelect(value) {
+    setSelect(value);
+    console.log(`selected ${value}`);
+  }
+
+  function handleTitle(value) {
+    setTitle(value.target.value);
+  }
+
+  function handleAudioFile(value) {
+    mostRecent = value.file;
+    setAudioFile(mostRecent);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(photoFile);
+    const formData = new FormData();
+    formData.append("image", photoFile);
+    // formData.append("audio", audioFile);
+    songPost(`/api/upload/`, formData);
+  }
+
+  async function handleSongPhoto(value) {
+    setPhotoFile(value.file);
+    console.log(value.file);
+    const readURL = (file) => {
+      return new Promise((res, rej) => {
+        const reader = new FileReader();
+        reader.onload = (e) => res(e.target.result);
+        reader.onerror = (e) => rej(e);
+        reader.readAsDataURL(file);
+      });
+    };
+    const url = await readURL(value.file.originFileObj);
+    setPhotoImage(url);
+    setImageLoading(false);
   }
 
   const { loading, imageUrl } = imageLoading;
@@ -79,6 +104,12 @@ function UploadPage() {
     }
   }
 
+  const dummyRequest = ({ file, onSuccess }) => {
+    setTimeout(() => {
+      onSuccess("ok");
+    }, 0);
+  };
+
   useEffect(() => {
     // profileFetch();
   }, []);
@@ -88,8 +119,6 @@ function UploadPage() {
       className="layout"
       style={{ background: "none", height: "100vh", paddingBottom: "10vh" }}
     >
-      {" "}
-      height: "100vh", paddingBottom: "10vh",
       <Content style={{ backgroundColor: "#edeeef", marginTop: "0px" }}>
         {/* <div className="site-layout-content">Content</div> */}
         <div
@@ -119,35 +148,35 @@ function UploadPage() {
             <Row>
               <Col span={14}>
                 <h4>Song Title</h4>
-                <Input size="large" />
+                <Input onChange={handleTitle} value={title} size="large" />
               </Col>
-              <Col span={3}></Col>
-              <Col
-                span={6}
-                style={{ display: "flex", justifyContent: "center" }}
-              >
-                <Upload
-                  name="avatar"
-                  listType="picture-card"
-                  className="avatar-uploader"
-                  showUploadList={false}
-                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  beforeUpload={beforeUpload}
-                  onChange={handleChange}
+              <Col span={4}></Col>
+              <Col span={5}>
+                <h4>Genre</h4>
+                <Select
+                  value={select}
+                  style={{ width: 120 }}
+                  onChange={handleSelect}
                 >
-                  {imageUrl ? (
-                    <img src={imageUrl} alt="avatar" style={{ width: "50%" }} />
-                  ) : (
-                    uploadButton
-                  )}
-                </Upload>
+                  <Option value="Rock">Rock</Option>
+                  <Option value="Funk">Funk</Option>
+                  <Option value="Pop">Pop</Option>
+                  <Option value="Techno">Techno</Option>
+                  <Option value="Country">Country</Option>
+                  <Option value="Classical">Classical</Option>
+                </Select>
               </Col>
             </Row>
             <Row>
               <Col span={3}></Col>
               <Col
                 span={10}
-                style={{ display: "flex", justifyContent: "center" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "flex-end",
+                  height: "6vh",
+                }}
               >
                 <h3>Audio</h3>
               </Col>
@@ -155,7 +184,10 @@ function UploadPage() {
             </Row>
             <Row>
               <Col span={16}>
-                <Dragger {...props} onChange={onChange}>
+                <Dragger
+                  customRequest={dummyRequest}
+                  onChange={handleAudioFile}
+                >
                   <p className="ant-upload-drag-icon">
                     <InboxOutlined />
                   </p>
@@ -165,7 +197,46 @@ function UploadPage() {
                   </p>
                 </Dragger>
               </Col>
-              <Col span={3}></Col>
+              <Col span={2}></Col>
+              <Col style={{ display: "flex", alignItems: "center" }}>
+                <Upload
+                  name="avatar"
+                  listType="picture-card"
+                  className="avatar-uploader"
+                  showUploadList={false}
+                  customRequest={dummyRequest}
+                  onChange={handleSongPhoto}
+                >
+                  {photoImage ? (
+                    <img
+                      src={photoImage}
+                      alt="avatar"
+                      style={{ width: "50%" }}
+                    />
+                  ) : (
+                    uploadButton
+                  )}
+                </Upload>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={24}>
+                <form encType="multipart/form-data" onSubmit={handleSubmit}>
+                  <input type="file"></input>
+                  <button
+                    style={{
+                      background: "rgb(22, 22, 23)",
+                      color: "rgba(255, 255, 255, 0.65)",
+                      borderColor: "#001529",
+                      float: "right",
+                      marginRight: "1.5vh",
+                    }}
+                    type="submit"
+                  >
+                    Upload Song
+                  </button>
+                </form>
+              </Col>
             </Row>
           </div>
         </div>

@@ -19,6 +19,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(255),
       },
+      genre: {
+        allowNull: false,
+        type: Sequelize.STRING(255),
+      },
       profileId: {
         type: Sequelize.INTEGER,
         references: { model: "Profiles" },

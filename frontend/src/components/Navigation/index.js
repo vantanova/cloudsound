@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory, usHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import * as sessionProfileActions from "../../store/profile";
@@ -10,6 +10,7 @@ import "antd/dist/antd.css";
 const { SubMenu } = Menu;
 
 function Navigation({ isLoaded }) {
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   let navLinks;
@@ -44,6 +45,7 @@ function Navigation({ isLoaded }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     dispatch(sessionProfileActions.removeSessionProfile());
+    history.push("/");
   };
 
   return (

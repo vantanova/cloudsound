@@ -9,6 +9,7 @@ import * as sessionActions from "./store/session";
 import * as sessionProfileActions from "./store/profile";
 import Navigation from "./components/Navigation";
 import UploadPage from "./components/UploadPage";
+import SongPage from "./components/SongPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route path="/upload">
             <UploadPage />
+          </Route>
+          <Route path="/songs">
+            <SongPage />
           </Route>
         </Switch>
       )}

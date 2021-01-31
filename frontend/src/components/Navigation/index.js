@@ -62,6 +62,11 @@ function Navigation({ isLoaded }) {
             Home
           </NavLink>
         </Menu.Item>
+        {/* <Menu.Item key="Music">
+          <NavLink exact to="/songs">
+            Music
+          </NavLink>
+        </Menu.Item> */}
 
         {isLoaded && sessionUser && navLinks}
 

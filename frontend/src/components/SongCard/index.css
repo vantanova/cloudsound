@@ -1,0 +1,13 @@
+.ant-card-body {
+  background: none;
+  padding: 10px;
+}
+
+.ant-card {
+  background: rgb(22, 22, 23);
+}
+
+.ant-card-meta-title {
+  margin-top: -5px;
+  color: white;
+}

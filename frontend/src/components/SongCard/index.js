@@ -4,29 +4,23 @@ import "./index.css";
 import { Card } from "antd";
 const { Meta } = Card;
 
-function SongCard({ data }) {
-  let songData;
-
-  if (data) {
-    songData = data.homeFiles[0];
-  } else {
-  }
-
-  console.log(songData);
+function SongCard({ file }) {
+  console.log(file);
+  console.log("hit");
 
   return (
-    <div style={{ width: 150, marginLeft: 10 }}>
-      {songData ? (
+    <div style={{ height: "10vh", margin: "1vh" }}>
+      {file ? (
         <Card
           style={{
             color: "white",
             width: 150,
           }}
-          cover={<img alt="example" src={songData.image} />}
+          cover={<img alt="example" src={file.image} />}
           bordered={false}
         >
-          <Meta style={{ color: "white" }} title={songData.title}>
-            <p style={{ color: "white" }}>{songData.title}</p>
+          <Meta style={{ color: "white" }} title={file.title}>
+            <p style={{ color: "white" }}>{file.title}</p>
           </Meta>
         </Card>
       ) : (

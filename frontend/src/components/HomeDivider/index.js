@@ -8,25 +8,9 @@ function HomeDivider() {
   return (
     <>
       <Row>
-        <Col span={16} className="contentbox">
+        <Col span={24} className="contentbox">
           Content
         </Col>
-        <Col span={8} className="contentbox">
-          Image
-        </Col>
-      </Row>
-      <Row>
-        <Col className="contentbox" span={8}>
-          col-8
-        </Col>
-        <Col span={8}>col-8</Col>
-        <Col span={8}>col-8</Col>
-      </Row>
-      <Row>
-        <Col span={6}>col-6</Col>
-        <Col span={6}>col-6</Col>
-        <Col span={6}>col-6</Col>
-        <Col span={6}>col-6</Col>
       </Row>
     </>
   );

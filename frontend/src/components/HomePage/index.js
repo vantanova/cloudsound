@@ -5,7 +5,7 @@ import { fetch } from "../../store/csrf";
 import SongCard from "../SongCard";
 import VideoHeader from "../VideoHeader";
 import HomeDivider from "../HomeDivider";
-import { Input } from "antd";
+import { Input, Row, Col } from "antd";
 import "./index.css";
 import "antd/dist/antd.css";
 
@@ -15,6 +15,7 @@ function HomePage() {
   const [data, setData] = useState();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const divData = ["Rock Music, "];
   if (sessionUser) {
     const userId = sessionUser.id;
     dispatch(sessionProfileActions.profilePageFetch(userId));
@@ -36,8 +37,12 @@ function HomePage() {
   return (
     <div style={{ height: "100%" }}>
       <VideoHeader></VideoHeader>
-      <HomeDivider></HomeDivider>
-      <SongCard data={data}></SongCard>
+      <div style={{ height: "100vh", padding: "2vh", display: "flex" }}>
+        {data &&
+          data.homeFiles.map((file) => {
+            return <SongCard file={file}></SongCard>;
+          })}
+      </div>
     </div>
   );
 }

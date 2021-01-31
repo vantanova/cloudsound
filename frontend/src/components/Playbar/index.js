@@ -16,11 +16,18 @@ function Playbar() {
   const sessionUser = useSelector((state) => state.session.user);
   const sessionSongs = useSelector((state) => state.song.songs);
   const [audio, setAudio] = useState();
-  console.log(audio);
+  console.log(sessionSongs);
+  console.log(sessionSongs);
 
-  useEffect(() => {
-    setAudio(sessionSongs);
-  }, [sessionSongs]);
+  function handleSongs(songsArr) {
+    const playlist = [];
+    const playableList = songsArr.forEach((song) => {
+      playlist.push({ musicSrc: song });
+    });
+    setAudio(playlist);
+  }
+
+  console.log(audio);
 
   const dispatch = useDispatch();
   let navLinks;

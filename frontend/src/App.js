@@ -7,9 +7,11 @@ import ProfilePage from "./components/ProfilePage";
 import HomePage from "./components/HomePage";
 import * as sessionActions from "./store/session";
 import * as sessionProfileActions from "./store/profile";
+import * as sessionSongActions from "./store/song";
 import Navigation from "./components/Navigation";
 import UploadPage from "./components/UploadPage";
 import SongPage from "./components/SongPage";
+import Playbar from "./components/Playbar";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +45,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Playbar></Playbar>
     </>
   );
 }

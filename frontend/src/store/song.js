@@ -3,6 +3,10 @@ import { dispatch, getState } from "react-redux";
 
 const musicArr = [];
 
+export function getSongs() {
+  return musicArr;
+}
+
 export function addSong(song) {
   musicArr.push(song);
   return { type: "ADD_SONG", song };

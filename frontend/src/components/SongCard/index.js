@@ -10,9 +10,7 @@ function SongCard({ file }) {
   const dispatch = useDispatch();
 
   function addToQueue() {
-    console.log("hit");
-    console.log(file.audio);
-    dispatch(sessionSongActions.addSong(file.audio));
+    dispatch(sessionSongActions.addSong(file));
   }
 
   return (
@@ -27,7 +25,9 @@ function SongCard({ file }) {
               color: "white",
               width: 150,
             }}
-            cover={<img alt="example" src={file.image} />}
+            cover={
+              <img alt="example" src={file.image} style={{ height: 150 }} />
+            }
             bordered={false}
           >
             <Meta style={{ color: "white" }} title={file.title}>

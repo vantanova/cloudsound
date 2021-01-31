@@ -13,8 +13,8 @@ router.post(
   asyncHandler(async (req, res, next) => {
     const userProfileId = parseInt(req.params.id);
     console.log("```````", req.body);
-    console.log("`````````````````````", req.file);
-    // const profileImageUrl = await singlePublicFileUpload(req.file);
+
+    // console.log(songImageUrl);
     // const song = await Song.create({
     //   image: "default",
     //   headerImage: "default",

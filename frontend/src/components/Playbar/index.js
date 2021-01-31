@@ -13,16 +13,27 @@ import { set } from "js-cookie";
 const { SubMenu } = Menu;
 
 function Playbar() {
+  let songs;
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const sessionSongs = useSelector((state) => state.song.songs);
   const [audio, setAudio] = useState();
   const [render, setRender] = useState();
 
-  function handleSongs(songsArr) {
+  async function handleClick() {
+    songs = sessionSongActions.getSongs();
+    console.log(songs);
+  }
+
+  function handleSongs() {
     const playlist = [];
-    const playableList = songsArr.forEach((song) => {
-      playlist.push({ musicSrc: song });
+    const playableList = songs.forEach((song) => {
+      console.log(song.image);
+      playlist.push({
+        musicSrc: song.audio,
+        cover: song.image,
+        name: song.title,
+      });
     });
     console.log(playlist);
     setAudio(playlist);
@@ -31,15 +42,26 @@ function Playbar() {
   return (
     <div style={{ position: "fixed", bottom: "0" }}>
       <button
+        onClick={handleClick}
         style={{
-          marginBottom: "4.2vh",
+          marginBottom: "8vh",
           background: "rgb(22, 22, 23)",
           color: "rgba(255, 255, 255, 0.65)",
           borderColor: "#001529",
-          float: "right",
         }}
       >
-        Force Update
+        Add To Queue
+      </button>
+      <button
+        onClick={handleSongs}
+        style={{
+          marginBottom: "8vh",
+          background: "rgb(22, 22, 23)",
+          color: "rgba(255, 255, 255, 0.65)",
+          borderColor: "#001529",
+        }}
+      >
+        Update Audio
       </button>
       <ReactJkMusicPlayer
         audioLists={audio}

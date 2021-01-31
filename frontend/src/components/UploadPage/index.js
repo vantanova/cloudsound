@@ -25,7 +25,14 @@ function UploadPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const userId = sessionUser.id;
 
-  async function songPost(url, insertFile) {
+  async function songPost(url, songData) {
+    const res = await fetch(url, {
+      method: "POST",
+      body: songData,
+    });
+  }
+
+  async function songAudioPost(url, insertFile) {
     const res = await fetch(url, {
       method: "POST",
       headers: {
@@ -35,13 +42,20 @@ function UploadPage() {
     });
   }
 
-  function submitSong() {
-    console.log("yes");
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("hello");
+    const data = { select, title };
+    console.log(data);
+    const formData = new FormData();
+    formData.append("image", photoFile);
+    // // formData.append("audio", audioFile);
+    songPost(`/api/upload/`, JSON.stringify(data));
+    songAudioPost(`/api/upload/`, formData);
   }
 
   function handleSelect(value) {
     setSelect(value);
-    console.log(`selected ${value}`);
   }
 
   function handleTitle(value) {
@@ -51,15 +65,6 @@ function UploadPage() {
   function handleAudioFile(value) {
     mostRecent = value.file;
     setAudioFile(mostRecent);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(photoFile);
-    const formData = new FormData();
-    formData.append("image", photoFile);
-    // formData.append("audio", audioFile);
-    songPost(`/api/upload/`, formData);
   }
 
   async function handleSongPhoto(value) {

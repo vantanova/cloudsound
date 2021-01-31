@@ -9,6 +9,7 @@ import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 import "antd/dist/antd.css";
 import "./index.css";
+import { set } from "js-cookie";
 const { SubMenu } = Menu;
 
 function Playbar() {
@@ -16,25 +17,30 @@ function Playbar() {
   const sessionUser = useSelector((state) => state.session.user);
   const sessionSongs = useSelector((state) => state.song.songs);
   const [audio, setAudio] = useState();
-  console.log(sessionSongs);
-  console.log(sessionSongs);
+  const [render, setRender] = useState();
 
   function handleSongs(songsArr) {
     const playlist = [];
     const playableList = songsArr.forEach((song) => {
       playlist.push({ musicSrc: song });
     });
+    console.log(playlist);
     setAudio(playlist);
   }
 
-  console.log(audio);
-
-  const dispatch = useDispatch();
-  let navLinks;
-  let sessionLinks;
-
   return (
     <div style={{ position: "fixed", bottom: "0" }}>
+      <button
+        style={{
+          marginBottom: "4.2vh",
+          background: "rgb(22, 22, 23)",
+          color: "rgba(255, 255, 255, 0.65)",
+          borderColor: "#001529",
+          float: "right",
+        }}
+      >
+        Force Update
+      </button>
       <ReactJkMusicPlayer
         audioLists={audio}
         showDownload={false}

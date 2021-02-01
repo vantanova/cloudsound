@@ -5,21 +5,19 @@ CloudSound
 
 ---
 
-**Aurora** is a clone of **[Quora](https://www.quora.com/)** with an added "ranking" of questions by expertise level.
-The expertise level ranking allows the questions to be easily accessed by novice, 
-intermediate and expert levels of difficulty. 
-<img alt="Logo" align="right" src="https://user-images.githubusercontent.com/70561117/103400052-8645d380-4af8-11eb-8c61-1f2bab847bfd.png" width="20%" />
+**CloudSound** is a clone of **[SoundCloud](https://www.soundcloud.com/)**.
+It is a clone made with React and Redux that utilizes session store to carry information throughout
+the application. 
 * Users can **log in** or **sign up** to access some functionality the site.
-* A logged in user has the ability to **post questions** with both a topic and expertise level.
-* Posted questions can be **answered**, and answers can be **commented on**.
-* The **search** bar can find questions using a search term and **SQL queries**.  
-* Search results can be **sorted** by topic or expertise level.
+* A logged in user has the ability to **post songs and create a profile**.
+* Posted songs can be **commented on**.  
+* Images and audio are uploaded to **aws**.
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/70362985/104137695-4981a400-5364-11eb-8ff9-7efc03e85bfd.png">
 </p>
 
-<h2>Try the site live: <a href=http://aurora-quora.herokuapp.com/>Here</a> <b>|</b> Check out our <a href="https://github.com/cellomatt/aurora/wiki">documentation</a></h2>
+<h2>Try the site live: <a href=https://cloud-sound-react.herokuapp.com//>Here</a> <b>|</b> Check out <a href="https://github.com/vantanova/cloudsound/wiki">documentation</a></h2>
 
 ## How to run the site locally
 

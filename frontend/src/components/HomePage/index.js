@@ -35,9 +35,17 @@ function HomePage() {
   }, []);
 
   return (
-    <div style={{ height: "100%" }}>
+    <div style={{ height: "200vh" }}>
       <VideoHeader></VideoHeader>
-      <div style={{ height: "100vh", padding: "2vh", display: "flex" }}>
+      <div
+        style={{
+          width: "100%",
+          padding: "2vh",
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+        }}
+      >
         {data &&
           data.homeFiles.map((file) => {
             return <SongCard file={file}></SongCard>;

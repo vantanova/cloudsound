@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
-const { User, Profile } = require("../../db/models");
+const { User, Profile, Comment } = require("../../db/models");
 const { use } = require("./session");
 const { singlePublicFileUpload, singleMulterUpload } = require("../../awsS3");
 

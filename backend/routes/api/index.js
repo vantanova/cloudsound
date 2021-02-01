@@ -4,10 +4,12 @@ const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
 const profileRouter = require("./profile.js");
 const uploadRouter = require("./upload.js");
+const commentsRouter = require("./comments.js");
 const homeRouter = require("./home.js");
 
 router.use("/upload", uploadRouter);
 router.use("/session", sessionRouter);
+router.use("/comments", commentsRouter);
 router.use("/profile", profileRouter);
 router.use("/users", usersRouter);
 router.use("/", homeRouter);

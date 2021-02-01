@@ -6,22 +6,37 @@ const { setTokenCookie, restoreUser } = require("../../utils/auth");
 const { Song } = require("../../db/models");
 const { use } = require("./session");
 const { singlePublicFileUpload, singleMulterUpload } = require("../../awsS3");
+let title;
+let genre;
+let user;
 
 router.post(
   "/",
-  singleMulterUpload("image"),
+  singleMulterUpload("audio"),
   asyncHandler(async (req, res, next) => {
     const userProfileId = parseInt(req.params.id);
-    console.log("```````", req.body);
+    const profileSongUrl = await singlePublicFileUpload(req.file);
+    console.log(profileSongUrl);
 
-    // console.log(songImageUrl);
-    // const song = await Song.create({
-    //   image: "default",
-    //   headerImage: "default",
-    //   bio: "default",
-    //   userId: user.id,
-    // });
-    // return res.json({ song });
+    const song = await Song.create({
+      image: "default",
+      audio: `${profileSongUrl}`,
+      title: title,
+      genre: genre,
+      profileId: user,
+    });
+    return res.json({ song });
+  })
+);
+
+router.post(
+  "/1",
+  asyncHandler(async (req, res, next) => {
+    const userProfileId = parseInt(req.params.id);
+    genre = req.body.select;
+    title = req.body.title;
+    user = req.body.userId;
+    console.log("```````", user);
   })
 );
 

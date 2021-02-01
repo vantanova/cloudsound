@@ -18,6 +18,8 @@ function UploadPage() {
   let mostRecent;
   const [title, setTitle] = useState();
   const [select, setSelect] = useState();
+  let file;
+  let audio;
   const [audioFile, setAudioFile] = useState();
   const [photoFile, setPhotoFile] = useState();
   const [photoImage, setPhotoImage] = useState();
@@ -28,7 +30,10 @@ function UploadPage() {
   async function songPost(url, songData) {
     const res = await fetch(url, {
       method: "POST",
-      body: songData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(songData),
     });
   }
 
@@ -44,14 +49,18 @@ function UploadPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("hello");
-    const data = { select, title };
-    console.log(data);
+    const data = { select, title, userId };
     const formData = new FormData();
-    formData.append("image", photoFile);
-    // // formData.append("audio", audioFile);
-    songPost(`/api/upload/`, JSON.stringify(data));
-    songAudioPost(`/api/upload/`, formData);
+
+    console.log(file);
+    formData.append("audio", file);
+
+    // songPost(`/api/upload/`, JSON.stringify(data));
+
+    songPost(`/api/upload/1/`, data);
+    setTimeout(() => {
+      songAudioPost(`/api/upload/`, formData);
+    }, 1000);
   }
 
   function handleSelect(value) {
@@ -62,9 +71,14 @@ function UploadPage() {
     setTitle(value.target.value);
   }
 
-  function handleAudioFile(value) {
-    mostRecent = value.file;
-    setAudioFile(mostRecent);
+  function handleAudioFile(e) {
+    audio = e.target.files[0];
+    console.log(audio);
+  }
+
+  function handleUpload(e) {
+    file = e.target.files[0];
+    console.log(file);
   }
 
   async function handleSongPhoto(value) {
@@ -227,7 +241,11 @@ function UploadPage() {
             <Row>
               <Col span={24}>
                 <form encType="multipart/form-data" onSubmit={handleSubmit}>
-                  <input type="file"></input>
+                  <input
+                    name="file"
+                    type="file"
+                    onChange={handleUpload}
+                  ></input>
                   <button
                     style={{
                       background: "rgb(22, 22, 23)",

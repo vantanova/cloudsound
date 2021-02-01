@@ -22,12 +22,14 @@ the application.
 ## How to run the site locally
 
 - Clone the repo
-- Use the command ```npm install``` to install all dependencies
+- ```cd``` into both the back and front end
+- Use the command ```npm install``` to install all dependencies 
 - Make a copy of the .env.example file and edit to match local db configuration
 - Create the database and user in psql
   * Run all migrations with ```npx dotenv sequelize db:migrate```
   * Seed all data with ```npx dotenv sequelize db:seed:all```
-- Use the start script ```npm start``` to run the server
+- Use the start script ```npm start``` to run the server on both back and frontend 
+- Setup aws with own user and access keys. 
 
 ## Technologies used in Aurora
 <p align="left">
@@ -43,8 +45,8 @@ the application.
 <img src="https://img.shields.io/badge/Pug-v3-blue">
 <a/>
   
-<a href="https://nodejs.org/en/">  
-<img src="https://img.shields.io/badge/Node-v14.15.3-blue">
+<a href="https://reactjs.org/">  
+<img src="https://img.shields.io/badge/React-v17.0.1-blue">
 <a/>
 
 <a href="https://www.heroku.com/">
@@ -55,20 +57,18 @@ the application.
 **Sequelize** was used to store and easily manage data with its amazing 
 data models and migrations.
 
-**Express JS** was our framework and it reduced a ton of boiler plate 
-code, freeing us to implement more features. 
+**Express JS** was the framework and it reduced a ton of boiler plate 
+code, freeing time to implement more features. 
 
-**npm** was our software registry, and within it we installed many packages;
+**npm** was the software registry, and within it we installed many packages;
 some notable examples include:
-* nodemon,
 * morgan, 
 * express-validator,
 * *and more* 
 
-**Pug** is an excellent view engine we used to quickly and
-beautifully display HTML on our pages.
+**React** was used to render the frontend with functional components. 
 
-**Heroku** is the web hosting app of our choice that allowed us to 
+**Heroku** is the web hosting app of choice that allowed us to 
 run our app on the cloud! 
 
 **Honorable Mentions** are the developement tools that made life 
@@ -76,7 +76,7 @@ much more enjoyable!
 * Postman made route testing very easy and fun!
 * Postbird, its wonderful GUI made all the difference!
 
-## Features that we implemented
+## Features implemented
 The first big feature we tackled is the searching algorithm,
 which populates the page with results containing either a question's
 title or its message. 

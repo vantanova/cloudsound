@@ -56,16 +56,9 @@ data models and migrations.
 **Express JS** was the framework and it reduced a ton of boiler plate 
 code, freeing time to implement more features. 
 
-**npm** was the software registry, and within it we installed many packages;
-some notable examples include:
-* morgan, 
-* express-validator,
-* *and more* 
-
 **React** was used to render the frontend with functional components. 
 
-**Heroku** is the web hosting app of choice that allowed us to 
-run our app on the cloud! 
+**Heroku** is the web hosting app of choice than ran the app on the cloud! 
 
 **Honorable Mentions** are the developement tools that made life 
 much more enjoyable! 

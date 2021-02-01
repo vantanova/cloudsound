@@ -40,11 +40,7 @@ the application.
 <a href="https://expressjs.com/">
 <img src="https://img.shields.io/badge/Express-v4.17.1-blue">
 <a/>
-   
-<a href="https://pugjs.org/api/getting-started.html">
-<img src="https://img.shields.io/badge/Pug-v3-blue">
-<a/>
-  
+
 <a href="https://reactjs.org/">  
 <img src="https://img.shields.io/badge/React-v17.0.1-blue">
 <a/>

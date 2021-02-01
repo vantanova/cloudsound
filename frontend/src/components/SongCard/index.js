@@ -26,7 +26,6 @@ function SongCard({ file }) {
   const [display, setDisplay] = useState();
   const sessionUser = useSelector((state) => state.session.user);
   let comments;
-  let commentContent;
 
   async function onSubmit(e) {
     console.log(file.id);

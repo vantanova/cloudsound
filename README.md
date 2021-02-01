@@ -14,7 +14,7 @@ the application.
 * Images and audio are uploaded to **aws**.
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/70362985/104137695-4981a400-5364-11eb-8ff9-7efc03e85bfd.png">
+<img src="https://user-images.githubusercontent.com/70561117/106428050-315deb80-641d-11eb-9f6a-4a18fc5ba099.PNG">
 </p>
 
 <h2>Try the site live: <a href=https://cloud-sound-react.herokuapp.com//>Here</a> <b>|</b> Check out <a href="https://github.com/vantanova/cloudsound/wiki">documentation</a></h2>
